@@ -26,8 +26,7 @@ func _handle_movement(delta):
 		velocity.y = 0
 	if (is_on_floor()):
 		velocity.y = 0
-	else:
-		velocity.y += grav
+	velocity.y += grav
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1
 		$AnimatedSprite.flip_h = false
