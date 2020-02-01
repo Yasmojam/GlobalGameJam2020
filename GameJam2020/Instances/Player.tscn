@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Instances/Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/player/walking frames/walking1.png" type="Texture" id=2]
@@ -9,18 +9,54 @@
 [ext_resource path="res://Textures/player/standing frames/standing4.png" type="Texture" id=7]
 [ext_resource path="res://Textures/player/standing frames/standing2.png" type="Texture" id=8]
 [ext_resource path="res://Textures/player/walking frames/walking2.png" type="Texture" id=9]
+[ext_resource path="res://Textures/player2/standing frames/standing1.png" type="Texture" id=10]
+[ext_resource path="res://Textures/player2/standing frames/standing3.png" type="Texture" id=11]
+[ext_resource path="res://Textures/player2/standing frames/standing2.png" type="Texture" id=12]
+[ext_resource path="res://Textures/player2/standing frames/standing4.png" type="Texture" id=13]
+[ext_resource path="res://Textures/player3/standing frames/standing3.png" type="Texture" id=14]
+[ext_resource path="res://Textures/player3/standing frames/standing4.png" type="Texture" id=15]
+[ext_resource path="res://Textures/player3/walking frames/walking1.png" type="Texture" id=16]
+[ext_resource path="res://Textures/player2/walking frames/walking4.png" type="Texture" id=17]
+[ext_resource path="res://Textures/player2/walking frames/walking1.png" type="Texture" id=18]
+[ext_resource path="res://Textures/player3/walking frames/walking2.png" type="Texture" id=19]
+[ext_resource path="res://Textures/player2/walking frames/walking3.png" type="Texture" id=20]
+[ext_resource path="res://Textures/player3/standing frames/standing2.png" type="Texture" id=21]
+[ext_resource path="res://Textures/player2/walking frames/walking2.png" type="Texture" id=22]
+[ext_resource path="res://Textures/player3/walking frames/walking3.png" type="Texture" id=23]
+[ext_resource path="res://Textures/player3/walking frames/walking4.png" type="Texture" id=24]
+[ext_resource path="res://Textures/player3/standing frames/standing1.png" type="Texture" id=25]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 16 ), ExtResource( 19 ), ExtResource( 23 ), ExtResource( 24 ) ],
 "loop": true,
-"name": "Walking",
+"name": "Walking P3",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 25 ), ExtResource( 21 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "StandingP3",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 22 ), ExtResource( 20 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "WalkingP2",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "Standing",
+"name": "StandingP1",
 "speed": 7.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "StandingP2",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "WalkingP1",
+"speed": 12.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -31,7 +67,7 @@ script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "Standing"
+animation = "StandingP3"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
