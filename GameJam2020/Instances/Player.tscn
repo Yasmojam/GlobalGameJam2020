@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Textures/player/standing frames/standing1.png" type="Texture" id=5]
+[ext_resource path="res://Textures/player/standing frames/standing3.png" type="Texture" id=6]
+[ext_resource path="res://Textures/player/standing frames/standing4.png" type="Texture" id=7]
+[ext_resource path="res://Textures/player/standing frames/standing2.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "Standing",
+"speed": 7.0
+}, {
+"frames": [ null, null, null, null ],
+"loop": true,
+"name": "Walking",
+"speed": 12.0
+} ]
+
+[node name="Player" type="Node2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Standing"
+centered = false

@@ -1,0 +1,2 @@
+﻿50477
+C:\Users\yasmo\Desktop\c# godot\Godot_v3.2-stable_mono_win64.exe
