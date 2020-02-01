@@ -55,11 +55,12 @@ func _handle_movement(delta):
 	rpc_unreliable("move_player", position, player_id)
 	if (position.y > 576):
 		delete(player_id)
-		rpc("delete", player_id)
+		rpc("deletePlayer", player_id)
 
-remote func delete(id):
+remote func deletePlayer(id):
 	if id == player_id:
 		print("Player " + str(player_id) + " died")
+		rpc("unregister_player", player_id)
 		queue_free()
 
 
