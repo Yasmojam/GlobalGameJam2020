@@ -17,12 +17,12 @@ func _process(delta):
 		rpc_unreliable("move_projectile", bullet_id, position)
 		if time_alive > MAX_LIFE:
 			delete(bullet_id)
-			rpc("delete", bullet_id)
+			rpc("deleteBullet", bullet_id)
 
 		# TODO: check for collision
 
 
-remote func delete(id):
+remote func deleteBullet(id):
 	if id == bullet_id:
 		print("deleting " + str(bullet_id))
 		queue_free()
