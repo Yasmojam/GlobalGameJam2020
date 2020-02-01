@@ -1,7 +1,9 @@
 extends Node
 
 const DEFAULT_PORT = 31416
-const IP_ADDRESS =  '192.168.0.21' # Iain's laptop 
+# Iain: 21
+# Pete: 15
+const IP_ADDRESS =  '192.168.0.21'
 const MAX_PEERS = 5
 
 var players = {}
