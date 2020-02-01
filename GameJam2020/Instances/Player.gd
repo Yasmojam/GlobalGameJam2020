@@ -4,6 +4,11 @@ export var speed = 128
 export var jumpInitSpeed = 3
 export var grav = 0.09375
 
+export var SHOOT_COOLDOWN = 1
+var shoot_available = true
+var last_shoot_time = 0
+var current_time = 0
+
 var velocity = Vector2()
 
 # Networking
@@ -23,7 +28,8 @@ func _physics_process(delta):
 
 func _process(delta):
 	if control:
-		_handle_actions()
+		current_time += delta
+		_handle_actions(delta)
 
 func _handle_movement(delta):
 	velocity.x = 0
@@ -49,8 +55,13 @@ func _handle_movement(delta):
 	rpc_unreliable("move_player", position, player_id)
 
 
-func _handle_actions():
-	if Input.is_action_just_pressed("ui_select"):
+func _handle_actions(delta):
+	if current_time - SHOOT_COOLDOWN > last_shoot_time:
+		shoot_available = true
+	
+	if shoot_available && Input.is_action_just_pressed("ui_select"):
+		shoot_available = false
+		last_shoot_time = current_time
 		var id = _next_bullet_id()
 		shoot(position, id,  true)
 		rpc("player_shoot", position, id)
