@@ -53,6 +53,14 @@ func _handle_movement(delta):
 	$AnimatedSprite.play()
 	move_and_slide(velocity*speed, Vector2(0, -1), true)
 	rpc_unreliable("move_player", position, player_id)
+	if (position.y > 576):
+		delete(player_id)
+		rpc("delete", player_id)
+
+remote func delete(id):
+	if id == player_id:
+		print("Player " + str(player_id) + " died")
+		queue_free()
 
 
 func _handle_actions(delta):
