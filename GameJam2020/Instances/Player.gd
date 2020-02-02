@@ -16,6 +16,8 @@ var control = false
 var player_id = 0
 var bullet_ids = 0
 
+export var MAX_INVENTORY_SIZE = 1
+var inventory = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,7 +53,15 @@ func _handle_movement(delta):
 	else:
 		$AnimatedSprite.animation = "Standing"
 	$AnimatedSprite.play()
+	
 	move_and_slide(velocity*speed, Vector2(0, -1), true)
+	
+	var collision_info = move_and_collide(velocity*delta)
+	if (collision_info != null):
+		if ("GoodScrap" in collision_info.collider.get_name() && inventory < MAX_INVENTORY_SIZE):
+			collision_info.collider_shape.get_parent().queue_free()
+			inventory += 1
+	
 	rpc_unreliable("move_player", position, player_id)
 	if (position.y > 576):
 		deletePlayer(player_id)
