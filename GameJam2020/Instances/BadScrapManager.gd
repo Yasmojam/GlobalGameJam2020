@@ -74,7 +74,6 @@ func send_updated_good_scrap_position(id, pos):
 
 remote func move_good_scrap(id, pos):
 	var child = get_node_or_null(id)
-	print(child)
 	if child:
 		child.position = pos
 	else:
