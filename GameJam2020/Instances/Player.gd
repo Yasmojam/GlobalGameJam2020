@@ -62,11 +62,11 @@ func _handle_movement(delta):
 	if Input.is_action_pressed("ui_left"):
 		velocity.x -= 1
 		$AnimatedSprite.flip_h = true
-	if !is_on_floor():
-		$AnimatedSprite.animation = falling_animation
 	if Input.is_action_just_pressed("ui_up") and is_on_floor():
 		velocity.y = -1 * jumpInitSpeed
 		$AnimatedSprite.animation = jumping_animation
+	elif !is_on_floor():
+		$AnimatedSprite.animation = falling_animation
 	elif velocity.x != 0 and is_on_floor():
 		$AnimatedSprite.animation = walking_animation 
 	elif is_on_floor():
