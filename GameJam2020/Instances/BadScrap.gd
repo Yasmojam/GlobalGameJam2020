@@ -11,6 +11,8 @@ var control = false
 
 var scrap_id
 
+signal scrapHitGround
+
 func init(x, y):
 	position.x = x
 	position.y = y
@@ -28,8 +30,15 @@ func _process(delta):
 
 	# TODO: check for collision
 
-remote func delete(id):
+remote func deleteBadScrap(id):
 	if id == scrap_id:
 		print("deleting " + str(scrap_id))
 		queue_free()
 
+func _on_Area2D_body_entered(body):
+	if (body.name == "Projectile"):
+		print("asdasdasd")
+	if (body.name == "GroundTileMap"):
+		emit_signal("scrapHitGround", position)
+	deleteBadScrap(scrap_id)
+	rpc("deleteBadScrap", scrap_id)
