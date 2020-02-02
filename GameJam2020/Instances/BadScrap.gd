@@ -6,6 +6,8 @@ export var Y_SPEED = 100
 var x_speed
 var y_speed
 
+var control = false
+
 var scrap_id
 
 func init(x, y):
@@ -15,12 +17,13 @@ func init(x, y):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position.x += x_speed * delta
-	if position.x > get_parent().MAX_X || position.x < get_parent().MIN_X:
-		x_speed = -x_speed
-	
-	position.y += Y_SPEED * delta
-	rpc_unreliable("move_scrap", scrap_id, position)
+	if control:
+		position.x += x_speed * delta
+		if position.x > get_parent().MAX_X || position.x < get_parent().MIN_X:
+			x_speed = -x_speed
+		
+		position.y += Y_SPEED * delta
+		rpc_unreliable("move_scrap", scrap_id, position)
 
 	# TODO: check for collision
 
