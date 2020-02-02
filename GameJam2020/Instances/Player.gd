@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var speed = 128
+export var speed = 175
 export var jumpInitSpeed = 3
 export var grav = 0.09375
 

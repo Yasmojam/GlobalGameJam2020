@@ -20,7 +20,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if time > 1.5:
+	if time > 0.1:
 		time = 0
 		var x = range(MIN_X,MAX_X)[randi()%range(MIN_X,MAX_X).size()]
 		var id = _next_scrap_id()
