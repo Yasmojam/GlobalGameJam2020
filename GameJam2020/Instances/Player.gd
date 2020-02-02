@@ -19,9 +19,25 @@ var bullet_ids = 0
 export var MAX_INVENTORY_SIZE = 1
 var inventory = 0
 
+var rng = RandomNumberGenerator.new()
+
+#Declares player number and selects the correct colours for all animations 
+var player_num = 0
+var walking_animation = ""
+var falling_animation = ""
+var standing_animation = ""
+var jumping_animation = ""
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	rng.randomize()
+	#assign player number
+	player_num = rng.randi_range(1,3) #inclusive of 1 and 3 random int
+	walking_animation = "WalkingP" + str(player_num)
+	falling_animation = "FallingP" + str(player_num)
+	standing_animation = "StandingP" + str(player_num)
+	jumping_animation = "JumpingP" + str(player_num)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -46,12 +62,15 @@ func _handle_movement(delta):
 	if Input.is_action_pressed("ui_left"):
 		velocity.x -= 1
 		$AnimatedSprite.flip_h = true
+	if !is_on_floor():
+		$AnimatedSprite.animation = falling_animation
 	if Input.is_action_just_pressed("ui_up") and is_on_floor():
 		velocity.y = -1 * jumpInitSpeed
-	if velocity.x != 0:
-		$AnimatedSprite.animation = "Walking"
-	else:
-		$AnimatedSprite.animation = "Standing"
+		$AnimatedSprite.animation = jumping_animation
+	elif velocity.x != 0 and is_on_floor():
+		$AnimatedSprite.animation = walking_animation 
+	elif is_on_floor():
+		$AnimatedSprite.animation = standing_animation
 	$AnimatedSprite.play()
 	
 	move_and_slide(velocity*speed, Vector2(0, -1), true)

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player4.png-400dd5eefa0615b318ab3d22cbf10529.stex"
+path="res://.import/jumpingp3.png-e9b0056a118e4bce9dc74256defaf6a2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/player/jumping frames/player4.png"
-dest_files=[ "res://.import/player4.png-400dd5eefa0615b318ab3d22cbf10529.stex" ]
+source_file="res://Textures/player3/jumping frames/jumpingp3.png"
+dest_files=[ "res://.import/jumpingp3.png-e9b0056a118e4bce9dc74256defaf6a2.stex" ]
 
 [params]
 
