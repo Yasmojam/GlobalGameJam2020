@@ -8,6 +8,7 @@ export var SHOOT_COOLDOWN = 1
 var shoot_available = true
 var last_shoot_time = 0
 var current_time = 0
+var projectile_scene = load("res://Instances/Projectile.tscn")
 
 var velocity = Vector2()
 
@@ -125,7 +126,6 @@ func _next_bullet_id():
 
 func shoot(pos, bullet_id, control):
 	print(bullet_id)
-	var projectile_scene = load("res://Instances/Projectile.tscn")
 	var projectile = projectile_scene.instance()
 	projectile.bullet_id = bullet_id
 	projectile.position = pos
