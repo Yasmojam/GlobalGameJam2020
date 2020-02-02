@@ -3,7 +3,7 @@ extends Node
 const DEFAULT_PORT = 31416
 # Iain: 21
 # Pete: 15
-const IP_ADDRESS =  '192.168.0.21'
+var IP_ADDRESS =  '192.168.0.21'
 const MAX_PEERS = 5
 
 var players = {}
@@ -17,9 +17,14 @@ func _ready():
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnect")
 	
-	# Join or host a game
-	#join_server()
-	start_server()
+	var args = OS.get_cmdline_args()
+	print(args)
+	if args.size() > 0:
+		IP_ADDRESS = args[0]
+		join_server()
+	else:
+		start_server()
+	
 
 	
 func start_server():
@@ -90,6 +95,7 @@ func spawn_player(id):
 	var player       = player_scene.instance()
 	
 	player.set_name(str(id))
+	player.setup_anim(id)
 	
 	if id == get_tree().get_network_unique_id():
 		player.set_network_master(id)

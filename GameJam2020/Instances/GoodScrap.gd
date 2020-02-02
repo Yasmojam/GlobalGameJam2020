@@ -24,3 +24,13 @@ func _physics_process(delta):
 func _process(delta):
 	if control:
 		manager.send_updated_good_scrap_position(scrap_id, position)
+
+
+func pick_up():
+	rpc("delete_good_scrap", scrap_id)
+	delete_good_scrap(scrap_id)
+
+
+remote func delete_good_scrap(id):
+	if id == scrap_id:
+		queue_free()
