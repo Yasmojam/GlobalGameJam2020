@@ -27,8 +27,6 @@ func _process(delta):
 		position.y += Y_SPEED * delta
 		rpc_unreliable("move_scrap", scrap_id, position)
 
-	# TODO: check for collision
-
 remote func deleteBadScrap(id):
 	if id == scrap_id:
 		print("deleting " + str(scrap_id))
@@ -41,7 +39,11 @@ remote func move_scrap(id, pos):
 
 func _on_Area2D_body_entered(body):
 	if (body.name == "Projectile"):
-		print("asdasdasd")
+		var good_scrap_scene = load("res://Instances/GoodScrap.tscn")
+		var good_scrap = good_scrap_scene.instance()
+		good_scrap.position = Vector2(position.x, position.y)
+		get_parent().add_child(good_scrap)
+		queue_free()
 	if (body.name == "GroundTileMap"):
 		emit_signal("scrapHitGround", position)
 	deleteBadScrap(scrap_id)
