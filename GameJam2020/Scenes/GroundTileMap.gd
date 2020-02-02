@@ -11,5 +11,9 @@ func _process(delta):
 	pass
 	
 func _on_scrapHitGround(scrapPos):
-	var tilePos = (scrapPos + Vector2(0,16)) / 32
+	remove_ground(scrapPos)
+	rpc("remove_ground", scrapPos)
+
+remote func remove_ground(pos):
+	var tilePos = (pos + Vector2(0,16)) / 32
 	set_cellv(tilePos, -1)

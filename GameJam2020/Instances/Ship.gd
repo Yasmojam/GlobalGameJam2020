@@ -20,11 +20,7 @@ func _ready():
 #	pass
 
 
-func _on_Ship_body_entered(body):
-	if ("Player" in body.get_filename()):
-		if (body.get_inventory_size() > 0):
-			body.drop_inventory()
-			health += 1
+func update_ship_health():
 	if (health == SCRAP_NEEDED_TO_UPGRADE):
 		get_child(0).set_texture(spaceship4)
 	if (health == SCRAP_NEEDED_TO_UPGRADE * 2):
@@ -33,3 +29,21 @@ func _on_Ship_body_entered(body):
 		get_child(0).set_texture(spaceship2)
 	if (health == SCRAP_NEEDED_TO_UPGRADE * 4):
 		get_child(0).set_texture(spaceship1)
+
+
+
+func _on_Ship_body_entered(body):
+	if ("Player" in body.get_filename()):
+		if (body.get_inventory_size() > 0):
+			body.drop_inventory()
+			health += 1
+			rpc("increment_health", 1)
+		update_ship_health()
+
+
+remote func increment_health(amount):
+	health += amount
+	update_ship_health()
+
+
+

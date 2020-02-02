@@ -30,10 +30,9 @@ var standing_animation = ""
 var jumping_animation = ""
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	rng.randomize()
+func setup_anim(id):
 	#assign player number
-	player_num = rng.randi_range(1,3) #inclusive of 1 and 3 random int
+	player_num = (id % 3) + 1
 	walking_animation = "WalkingP" + str(player_num)
 	falling_animation = "FallingP" + str(player_num)
 	standing_animation = "StandingP" + str(player_num)
@@ -79,7 +78,7 @@ func _handle_movement(delta):
 	var collision_info = move_and_collide(velocity*delta)
 	if (collision_info != null):
 		if ("GoodScrap" in collision_info.collider.get_name() && inventory < MAX_INVENTORY_SIZE):
-			collision_info.collider_shape.get_parent().queue_free()
+			collision_info.collider.pick_up()
 			inventory += 1
 			print("Picked up inventory. Inventory: ", inventory)
 		if ("Ship" in collision_info.collider.get_name() && inventory > 0):

@@ -20,7 +20,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if time > 0.1:
+	if time > 2:
 		time = 0
 		var x = range(MIN_X,MAX_X)[randi()%range(MIN_X,MAX_X).size()]
 		var id = _next_scrap_id()
@@ -60,6 +60,9 @@ remote func move_scrap(id, pos):
 
 
 func new_good_scrap(pos, id, control):
+	if not "GoodScrap" in id:
+		id = "GoodScrap " + id
+	
 	var good_scrap = good_scrap_scene.instance()
 	good_scrap.control = control
 	good_scrap.scrap_id = id
