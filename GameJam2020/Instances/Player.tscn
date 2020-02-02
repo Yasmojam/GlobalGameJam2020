@@ -55,6 +55,11 @@ animations = [ {
 "name": "FallingP1",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 16 ), ExtResource( 19 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "WalkingP3",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 34 ), ExtResource( 37 ), ExtResource( 35 ), ExtResource( 36 ) ],
 "loop": false,
 "name": "JumpingP3",
@@ -85,11 +90,6 @@ animations = [ {
 "name": "StandingP1",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 16 ), ExtResource( 19 ), ExtResource( 23 ), ExtResource( 24 ) ],
-"loop": true,
-"name": "Walking P3",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 10 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "StandingP2",
@@ -109,7 +109,7 @@ script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "FallingP3"
+animation = "WalkingP3"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
