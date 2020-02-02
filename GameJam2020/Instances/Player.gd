@@ -61,11 +61,22 @@ func _handle_movement(delta):
 		if ("GoodScrap" in collision_info.collider.get_name() && inventory < MAX_INVENTORY_SIZE):
 			collision_info.collider_shape.get_parent().queue_free()
 			inventory += 1
+			print("Picked up inventory. Inventory: ", inventory)
+		if ("Ship" in collision_info.collider.get_name() && inventory > 0):
+			inventory = 0
+			print("Dropped off inventory. Inventory: ", inventory)
+			
 	
 	rpc_unreliable("move_player", position, player_id)
 	if (position.y > 576):
 		deletePlayer(player_id)
 		rpc("deletePlayer", player_id)
+
+func drop_inventory():
+	inventory = 0
+
+func get_inventory_size():
+	return inventory
 
 remote func deletePlayer(id):
 	if id == player_id:
