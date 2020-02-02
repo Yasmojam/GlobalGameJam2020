@@ -54,7 +54,7 @@ func _handle_movement(delta):
 	move_and_slide(velocity*speed, Vector2(0, -1), true)
 	rpc_unreliable("move_player", position, player_id)
 	if (position.y > 576):
-		delete(player_id)
+		deletePlayer(player_id)
 		rpc("deletePlayer", player_id)
 
 remote func deletePlayer(id):
