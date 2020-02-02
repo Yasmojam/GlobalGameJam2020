@@ -11,6 +11,7 @@ var scrap_ids = 0
 
 var bad_scrap_scene = load("res://Instances/BadScrap.tscn")
 var good_scrap_scene = load("res://Instances/GoodScrap.tscn")
+onready var ground = get_node("/root/World/GroundTileMap")
 
 
 func _ready():
@@ -30,7 +31,7 @@ func _process(delta):
 
 func new_scrap(x, y, id, control):
 	var bad_scrap = bad_scrap_scene.instance()
-	bad_scrap.init(x, y)
+	bad_scrap.init(x, y, ground)
 	bad_scrap.scrap_id = id
 	bad_scrap.set_name(id)
 	bad_scrap.control = control

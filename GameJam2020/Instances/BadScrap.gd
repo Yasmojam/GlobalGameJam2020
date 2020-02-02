@@ -7,18 +7,18 @@ var x_speed
 var y_speed
 var manager
 
-var deleted = false
-
 var control = false
 
 var scrap_id
 
 signal scrapHitGround
 
-func init(x, y):
+func init(x, y, ground):
 	position.x = x
 	position.y = y
 	x_speed = range(MIN_X_SPEED,MAX_X_SPEED)[randi()%range(MIN_X_SPEED,MAX_X_SPEED).size()]
+	if (!is_connected("scrapHitGround", ground, "_on_scrapHitGround")):
+		connect("scrapHitGround", ground, "_on_scrapHitGround")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -36,18 +36,14 @@ remote func deleteBadScrap(id):
 		queue_free()
 
 func _on_Area2D_body_entered(body):
-	if deleted:
-		return
 	
 	if (body.name == "Projectile" and body.control):  # Our bullet
 		manager.new_good_scrap(position, manager._next_scrap_id(), true)
 		rpc("deleteBadScrap", scrap_id)
 		deleteBadScrap(scrap_id)
-		deleted = true
 	
 	if control:  # Our bad scrap
 		if (body.name == "GroundTileMap"):
 			emit_signal("scrapHitGround", position)
 		rpc("deleteBadScrap", scrap_id)
 		deleteBadScrap(scrap_id)
-		deleted = true
