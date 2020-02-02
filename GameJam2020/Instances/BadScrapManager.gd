@@ -10,6 +10,7 @@ var manager_id
 var scrap_ids = 0
 
 var bad_scrap_scene = load("res://Instances/BadScrap.tscn")
+var good_scrap_scene = load("res://Instances/GoodScrap.tscn")
 
 
 func _ready():
@@ -52,3 +53,27 @@ remote func move_scrap(id, pos):
 		child.position = pos
 	else:
 		new_scrap(pos.x, pos.y, id, false)
+
+
+# GOOD SCRAP ----------------------------
+
+
+func new_good_scrap(pos, id, control):
+	var good_scrap = good_scrap_scene.instance()
+	good_scrap.control = control
+	good_scrap.scrap_id = id
+	good_scrap.position = pos
+	good_scrap.manager = self
+	add_child(good_scrap)
+
+
+func send_updated_good_scrap_position(id, pos):
+	rpc_unreliable("move_good_scrap", id, pos)
+
+
+remote func move_good_scrap(id, pos):
+	var child = get_node_or_null(id)
+	if child:
+		child.position = pos
+	else:
+		new_good_scrap(pos, id, false)
