@@ -5,6 +5,7 @@ export var MAX_X_SPEED = 350
 export var Y_SPEED = 100
 var x_speed
 var y_speed
+var manager
 
 var control = false
 
@@ -23,7 +24,7 @@ func _process(delta):
 			x_speed = -x_speed
 		
 		position.y += Y_SPEED * delta
-		rpc_unreliable("move_scrap", scrap_id, position)
+		manager.send_updated_scrap_position(scrap_id, position)
 
 	# TODO: check for collision
 
@@ -32,6 +33,3 @@ remote func delete(id):
 		print("deleting " + str(scrap_id))
 		queue_free()
 
-remote func move_scrap(id, pos):
-	if id == scrap_id:
-		position = pos

@@ -49,9 +49,11 @@ func _handle_movement(delta):
 	if Input.is_action_just_pressed("ui_up") and is_on_floor():
 		velocity.y = -1 * jumpInitSpeed
 	if velocity.x != 0:
-		$AnimatedSprite.animation = "Walking"
+		#$AnimatedSprite.animation = "Walking"
+		pass
 	else:
-		$AnimatedSprite.animation = "Standing"
+		pass
+		#$AnimatedSprite.animation = "Standing"
 	$AnimatedSprite.play()
 	
 	move_and_slide(velocity*speed, Vector2(0, -1), true)
