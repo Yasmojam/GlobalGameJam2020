@@ -5,6 +5,7 @@ export var MAX_X_SPEED = 350
 export var Y_SPEED = 100
 var x_speed
 var y_speed
+var manager
 
 var control = false
 
@@ -25,17 +26,12 @@ func _process(delta):
 			x_speed = -x_speed
 		
 		position.y += Y_SPEED * delta
-		rpc_unreliable("move_scrap", scrap_id, position)
+		manager.send_updated_scrap_position(scrap_id, position)
 
 remote func deleteBadScrap(id):
 	if id == scrap_id:
 		print("deleting " + str(scrap_id))
 		queue_free()
-
-remote func move_scrap(id, pos):
-	if id == scrap_id:
-		position = pos
-
 
 func _on_Area2D_body_entered(body):
 	if (body.name == "Projectile"):
@@ -48,4 +44,3 @@ func _on_Area2D_body_entered(body):
 		emit_signal("scrapHitGround", position)
 	deleteBadScrap(scrap_id)
 	rpc("deleteBadScrap", scrap_id)
-	
