@@ -63,8 +63,9 @@ func new_good_scrap(pos, id, control):
 	var good_scrap = good_scrap_scene.instance()
 	good_scrap.control = control
 	good_scrap.scrap_id = id
-	good_scrap.position = pos
+	good_scrap.position = Vector2(pos.x, pos.y)
 	good_scrap.manager = self
+	good_scrap.set_name(id)
 	add_child(good_scrap)
 
 

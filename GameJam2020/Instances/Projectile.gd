@@ -26,7 +26,7 @@ func _process(delta):
 
 remote func deleteBullet(id):
 	if id == bullet_id:
-		print("deleting " + str(bullet_id))
+		print("deleting bullet " + str(bullet_id))
 		queue_free()
 
 

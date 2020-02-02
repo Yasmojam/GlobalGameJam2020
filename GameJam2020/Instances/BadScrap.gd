@@ -36,13 +36,14 @@ remote func deleteBadScrap(id):
 		queue_free()
 
 func _on_Area2D_body_entered(body):
-	if (body.name == "Projectile"):
-		var good_scrap_scene = load("res://Instances/GoodScrap.tscn")
-		var good_scrap = good_scrap_scene.instance()
-		good_scrap.position = Vector2(position.x, position.y)
-		get_parent().add_child(good_scrap)
-		queue_free()
-	if (body.name == "GroundTileMap"):
-		emit_signal("scrapHitGround", position)
-	deleteBadScrap(scrap_id)
-	rpc("deleteBadScrap", scrap_id)
+	
+	if (body.name == "Projectile" and body.control):  # Our bullet
+		manager.new_good_scrap(position, manager._next_scrap_id(), true)
+		rpc("deleteBadScrap", scrap_id)
+		deleteBadScrap(scrap_id)
+	
+	if control:  # Our bad scrap
+		if (body.name == "GroundTileMap"):
+			emit_signal("scrapHitGround", position)
+		rpc("deleteBadScrap", scrap_id)
+		deleteBadScrap(scrap_id)
