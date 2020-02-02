@@ -39,8 +39,9 @@ func _on_Area2D_body_entered(body):
 		var good_scrap = good_scrap_scene.instance()
 		good_scrap.position = Vector2(position.x, position.y)
 		good_scrap.control = true
-		good_scrap.scrap_id = scrap_id
+		good_scrap.scrap_id = scrap_id + "good"
 		good_scrap.manager = manager
+		good_scrap.set_name(scrap_id + "good")
 		get_parent().add_child(good_scrap)
 		queue_free()
 	if (body.name == "GroundTileMap"):
