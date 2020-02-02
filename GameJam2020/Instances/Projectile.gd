@@ -16,7 +16,7 @@ func _process(delta):
 		position.y -= speed * delta
 		rpc_unreliable("move_projectile", bullet_id, position)
 		if time_alive > MAX_LIFE:
-			delete(bullet_id)
+			deleteBullet(bullet_id)
 			rpc("deleteBullet", bullet_id)
 
 		# TODO: check for collision
