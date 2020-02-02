@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 
 export var speed = 400
 export var MAX_LIFE = 3  # seconds
@@ -18,8 +18,9 @@ func _process(delta):
 		if time_alive > MAX_LIFE:
 			deleteBullet(bullet_id)
 			rpc("deleteBullet", bullet_id)
-
-		# TODO: check for collision
+			
+	if (test_move(transform, Vector2(0, 0.1))):
+		queue_free()
 
 
 remote func deleteBullet(id):

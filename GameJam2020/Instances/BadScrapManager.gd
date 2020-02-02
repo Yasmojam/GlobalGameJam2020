@@ -26,11 +26,13 @@ func new_scrap(x, id, control):
 	var bad_scrap = load("res://Instances//BadScrap.tscn").instance()
 	bad_scrap.init(x, Y)
 	bad_scrap.scrap_id = id
+	bad_scrap.control = control
 	add_child(bad_scrap)
 
 func _next_scrap_id():
-	id = str(manager_id) = "_" + str(scrap_ids)
+	var scrap_id = str(manager_id) + "_" + str(scrap_ids)
 	scrap_ids += 1
+	return scrap_id
 
 remote func scrap_spawned(x, id):
 	new_scrap(x, id, false)	
