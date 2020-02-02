@@ -34,7 +34,7 @@ remote func deleteBadScrap(id):
 		queue_free()
 
 func _on_Area2D_body_entered(body):
-	if (body.control and body.name == "Projectile"):  # Our bullet
+	if (body.name == "Projectile" and body.control):  # Our bullet
 		var good_scrap_scene = load("res://Instances/GoodScrap.tscn")
 		var good_scrap = good_scrap_scene.instance()
 		good_scrap.position = Vector2(position.x, position.y)
