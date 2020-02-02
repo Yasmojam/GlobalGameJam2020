@@ -4,13 +4,13 @@
 [ext_resource path="res://Instances/GoodScrap.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 8.01434
+radius = 7.15598
 
 [node name="GoodScrap" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.628046, 2.30283 )
+position = Vector2( 1.4999, 2.30283 )
 scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 

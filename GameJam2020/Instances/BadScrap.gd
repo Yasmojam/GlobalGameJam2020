@@ -5,10 +5,13 @@ export var MAX_X_SPEED = 350
 export var Y_SPEED = 100
 var x_speed
 var y_speed
+var manager
 
 var control = false
 
 var scrap_id
+
+signal scrapHitGround
 
 func init(x, y):
 	position.x = x
@@ -23,15 +26,21 @@ func _process(delta):
 			x_speed = -x_speed
 		
 		position.y += Y_SPEED * delta
-		rpc_unreliable("move_scrap", scrap_id, position)
+		manager.send_updated_scrap_position(scrap_id, position)
 
-	# TODO: check for collision
-
-remote func delete(id):
+remote func deleteBadScrap(id):
 	if id == scrap_id:
 		print("deleting " + str(scrap_id))
 		queue_free()
 
-remote func move_scrap(id, pos):
-	if id == scrap_id:
-		position = pos
+func _on_Area2D_body_entered(body):
+	if (body.name == "Projectile"):
+		var good_scrap_scene = load("res://Instances/GoodScrap.tscn")
+		var good_scrap = good_scrap_scene.instance()
+		good_scrap.position = Vector2(position.x, position.y)
+		get_parent().add_child(good_scrap)
+		queue_free()
+	if (body.name == "GroundTileMap"):
+		emit_signal("scrapHitGround", position)
+	deleteBadScrap(scrap_id)
+	rpc("deleteBadScrap", scrap_id)
