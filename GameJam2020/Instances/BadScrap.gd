@@ -46,7 +46,7 @@ func _on_Area2D_body_entered(body):
 		queue_free()
 	
 	if control:  # Our bad scrap
-		deleteBadScrap(scrap_id)
-		rpc("deleteBadScrap", scrap_id)
 		if (body.name == "GroundTileMap"):
 			emit_signal("scrapHitGround", position)
+		rpc("deleteBadScrap", scrap_id)
+		deleteBadScrap(scrap_id)

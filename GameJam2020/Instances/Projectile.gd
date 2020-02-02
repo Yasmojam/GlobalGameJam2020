@@ -16,12 +16,12 @@ func _process(delta):
 		position.y -= speed * delta
 		rpc_unreliable("move_projectile", bullet_id, position)
 		if time_alive > MAX_LIFE:
-			deleteBullet(bullet_id)
 			rpc("deleteBullet", bullet_id)
+			deleteBullet(bullet_id)
 			
 		if (test_move(transform, Vector2(0, 0.1))):
-			deleteBullet(bullet_id)
 			rpc("deleteBullet", bullet_id)
+			deleteBullet(bullet_id)
 
 
 remote func deleteBullet(id):
