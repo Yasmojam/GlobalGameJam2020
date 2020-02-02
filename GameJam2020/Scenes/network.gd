@@ -18,7 +18,7 @@ func _ready():
 	get_tree().connect("server_disconnected", self, "_server_disconnect")
 	
 	# Join or host a game
-	# join_server()
+	#join_server()
 	start_server()
 
 	

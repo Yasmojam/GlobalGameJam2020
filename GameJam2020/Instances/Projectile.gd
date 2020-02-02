@@ -19,8 +19,9 @@ func _process(delta):
 			deleteBullet(bullet_id)
 			rpc("deleteBullet", bullet_id)
 			
-	if (test_move(transform, Vector2(0, 0.1))):
-		queue_free()
+		if (test_move(transform, Vector2(0, 0.1))):
+			deleteBullet(bullet_id)
+			rpc("deleteBullet", bullet_id)
 
 
 remote func deleteBullet(id):
