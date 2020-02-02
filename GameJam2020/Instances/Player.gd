@@ -101,7 +101,7 @@ func _handle_actions(delta):
 		shoot_available = false
 		last_shoot_time = current_time
 		var id = _next_bullet_id()
-		var pos = position + Vector2(16, 0)
+		var pos = position + Vector2(16, -8)
 		shoot(pos, id,  true)
 		rpc("player_shoot", pos, id)
 
